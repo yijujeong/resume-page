@@ -9,6 +9,7 @@ import org.springframework.web.client.RestTemplate;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 @Controller
 public class ResumeController {
@@ -16,7 +17,9 @@ public class ResumeController {
     @GetMapping("/")
     public String resumePage(Model model) {
         // 현재 날짜 시간
-        String currentDateTime = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+        String currentDateTime = sdf.format(new Date());
         model.addAttribute("currentDateTime", currentDateTime);
 
         // 외부 API 호출
